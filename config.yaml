@@ -1,0 +1,28 @@
+random_seed: 42
+
+paths:
+  raw_data: data/raw/H2.csv
+  processed_dir: data/processed
+  artifacts_dir: artifacts
+  figures_dir: outputs/figures
+  tables_dir: outputs/tables
+
+split:
+  # Train / validation / test; the test set is used once, for final evaluation only.
+  train_size: 0.70
+  val_size: 0.15
+  test_size: 0.15
+  cv_folds: 5
+
+# Fill each feature list after deciding the prediction point and leakage audit.
+regression:
+  target: ADR
+  features: []
+
+classification:
+  target: IsCanceled
+  stratify: true
+  features: []
+
+clustering:
+  features: []
