@@ -32,6 +32,8 @@ Raw quirks: categorical strings are space-padded (e.g. `"HB       "`), and `Agen
 
 ## Setup
 
+**New to Git/GitHub? Follow the step-by-step guide in [CONTRIBUTING.md](CONTRIBUTING.md).**
+
 ```bash
 python -m venv .venv
 # Windows: .venv\Scripts\activate    macOS/Linux: source .venv/bin/activate
