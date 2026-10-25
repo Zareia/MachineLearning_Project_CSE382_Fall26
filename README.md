@@ -12,12 +12,12 @@ An end-to-end machine learning system on the **City Hotel (H2)** booking dataset
 
 ## Team
 
-| Name | Student ID | GitHub account |
-|------|------------|----------------|
-|      |            |                |
-|      |            |                |
-|      |            |                |
-|      |            |                |
+| Name | Student ID |
+|------|------------|
+|      |            |
+|      |            |
+|      |            |
+|      |            |
 
 ## Dataset
 
