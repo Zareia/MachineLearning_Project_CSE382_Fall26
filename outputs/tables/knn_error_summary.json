@@ -1,0 +1,8 @@
+{
+  "validation_rows": 11707,
+  "mean_error_predicted_minus_actual": -0.5392276415819593,
+  "median_absolute_error": 9.650000000000006,
+  "p95_absolute_error": 49.760000000000005,
+  "max_absolute_error": 391.0,
+  "training_ADR_99th_percentile": 229.0
+}

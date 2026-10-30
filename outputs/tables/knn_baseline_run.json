@@ -1,0 +1,62 @@
+{
+  "seed": 42,
+  "regression": {
+    "target": "ADR",
+    "features": [
+      "LeadTime",
+      "ArrivalDateYear",
+      "ArrivalDateMonth",
+      "ArrivalDateDayOfMonth",
+      "StaysInWeekendNights",
+      "StaysInWeekNights",
+      "Adults",
+      "Children",
+      "Babies",
+      "Meal",
+      "MarketSegment",
+      "DistributionChannel",
+      "ReservedRoomType"
+    ],
+    "categorical_features": [
+      "ArrivalDateMonth",
+      "Meal",
+      "MarketSegment",
+      "DistributionChannel",
+      "ReservedRoomType"
+    ],
+    "knn": {
+      "n_neighbors": 5,
+      "weights": "uniform",
+      "p": 2
+    }
+  },
+  "split": {
+    "train_size": 0.7,
+    "val_size": 0.15,
+    "test_size": 0.15,
+    "cv_folds": 5
+  },
+  "split_method": "GroupShuffleSplit on identical cleaned predictor rows",
+  "rows": {
+    "train": 56007,
+    "validation": 11707,
+    "test": 11616
+  },
+  "fit_seconds": 0.11279679999279324,
+  "validation_predict_seconds": 10.480310400002054,
+  "test_evaluated": false,
+  "validation_results": [
+    {
+      "model": "Training-mean reference",
+      "MAE": 30.04806718723242,
+      "RMSE": 39.20434728243079,
+      "R2": -0.002779095840282464
+    },
+    {
+      "model": "KNN baseline",
+      "MAE": 15.273380541556332,
+      "RMSE": 24.444429233909798,
+      "R2": 0.6101508254540975
+    }
+  ]
+}

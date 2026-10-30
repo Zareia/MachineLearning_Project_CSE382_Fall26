@@ -71,7 +71,38 @@ tests/
 
 ## Run commands
 
-_To be added once the CLI/GUI entry point exists._
+KNN regression baseline (PowerShell, from the repository root):
+
+```powershell
+.\.venv\Scripts\python.exe -m src.regression.knn_baseline
+```
+
+Reports validation MAE, RMSE and R2 alongside a training-mean reference. The final
+test set is reserved. Settings are in `config.yaml`; assumptions, leakage notes,
+split policy and output descriptions are in
+[KNN baseline notes](reports/knn_baseline_notes.md).
+The complete multi-task application remains to be implemented.
+
+Training-only data-quality audit (no retraining or record removal):
+
+```powershell
+.\.venv\Scripts\python.exe -m src.data.audit_regression
+```
+
+Writes `outputs/tables/regression_training_audit.csv` and
+`outputs/tables/regression_training_missing.csv`. The KNN notes document the
+decisions and the source's pre-arrival snapshot timing limitation.
+
+Plot saved KNN validation predictions and the training ADR distribution:
+
+```powershell
+.\.venv\Scripts\python.exe -m src.evaluation.plot_knn
+```
+
+Writes `outputs/figures/knn_training_adr.png`,
+`outputs/figures/knn_validation_diagnostics.png` and
+`outputs/tables/knn_error_summary.json`. Run the baseline first. Plotting does not
+retrain the model or evaluate the reserved test set.
 
 ## Milestones
 

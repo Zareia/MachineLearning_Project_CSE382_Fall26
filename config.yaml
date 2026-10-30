@@ -17,7 +17,31 @@ split:
 # Fill each feature list after deciding the prediction point and leakage audit.
 regression:
   target: ADR
-  features: []
+  # Provisional booking-creation inputs; see reports/knn_baseline_notes.md.
+  features:
+    - LeadTime
+    - ArrivalDateYear
+    - ArrivalDateMonth
+    - ArrivalDateDayOfMonth
+    - StaysInWeekendNights
+    - StaysInWeekNights
+    - Adults
+    - Children
+    - Babies
+    - Meal
+    - MarketSegment
+    - DistributionChannel
+    - ReservedRoomType
+  categorical_features:
+    - ArrivalDateMonth
+    - Meal
+    - MarketSegment
+    - DistributionChannel
+    - ReservedRoomType
+  knn:
+    n_neighbors: 5
+    weights: uniform
+    p: 2
 
 classification:
   target: IsCanceled
