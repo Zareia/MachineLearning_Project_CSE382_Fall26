@@ -91,11 +91,7 @@ Install the libraries (takes a few minutes):
 pip install -r requirements.txt
 ```
 
-Check that everything works:
-```bash
-pytest
-```
-If you see **`1 passed`**, your setup is done. 🎉
+If it finishes without a red `ERROR`, your setup is done. 🎉
 
 ### Step 7: Your first contribution
 
@@ -209,7 +205,7 @@ git push                              # upload (after that)
 - ✅ **Work on a branch**, never directly on `main`.
 - ✅ **Commit from your own laptop and your own account.**
 - ✅ Use settings from `config.yaml` (random seed, file paths) instead of typing numbers into your code.
-- ✅ Load the data with `load_raw()` from `src/data/load.py`.
+- ✅ Load the data from `data/raw/H2.csv` (from a notebook: `pd.read_csv("../data/raw/H2.csv")`).
 - ❌ **Don't commit trained models** or big generated files. They go in `artifacts/`, which Git ignores automatically.
 - ❌ **Don't look at the test set** while choosing models or settings. Use the validation set or cross-validation. The test set is only for the final results.
 - ❌ Don't commit the `.venv` folder. It's ignored already, so just don't force it.

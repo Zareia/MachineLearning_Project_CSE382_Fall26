@@ -38,7 +38,6 @@ Raw quirks: categorical strings are space-padded (e.g. `"HB       "`), and `Agen
 python -m venv .venv
 # Windows: .venv\Scripts\activate    macOS/Linux: source .venv/bin/activate
 pip install -r requirements.txt
-pytest
 ```
 
 Python 3.11–3.12 is recommended, since some ML libraries may not ship wheels for the newest Python releases yet.
@@ -50,7 +49,7 @@ config.yaml          shared settings (seed, paths, split, per-task features)
 data/raw/            H2.csv (tracked)
 data/processed/      derived data (git-ignored)
 src/
-  data/              loading + schema validation
+  data/              data loading
   preprocessing/     imputation, encoding, scaling pipelines
   features/          task-specific feature selection / engineering
   regression/        ADR models
@@ -60,7 +59,7 @@ src/
   tuning/            hyperparameter search
   evaluation/        metrics, comparison tables, plots
   inference/         load saved artifacts, predict new bookings
-  utils/             config, seeding
+  utils/             shared helpers
 artifacts/           fitted pipelines/models (git-ignored, regenerate locally)
 outputs/figures/     EDA + result figures
 outputs/tables/      comparison tables
