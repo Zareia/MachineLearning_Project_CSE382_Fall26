@@ -7,26 +7,12 @@ An end-to-end machine learning system on the **City Hotel (H2)** booking dataset
 - **Task C – Clustering:** unsupervised booking/customer segments
 - PCA / LDA experiments, hyperparameter tuning, saved inference artifacts, and a CLI/GUI application
 
-**Repository:** https://github.com/Zareia/MachineLearning_Project_CSE382_Fall26
-**Submitted commit SHA:** _TBD_
-
-## Team
-
-| Name | Student ID |
-|------|------------|
-|      |            |
-|      |            |
-|      |            |
-|      |            |
-
 ## Dataset
 
 `data/raw/H2.csv`: 79,330 bookings × 31 variables, arrivals between 2015-07-01 and 2017-08-31.
 
 - Source: Nuno Antonio, Ana de Almeida, Luis Nunes. "Hotel booking demand datasets." *Data in Brief* 22 (2019) 41–49. https://pmc.ncbi.nlm.nih.gov/articles/PMC6297060/
 - Mirror used: https://raw.githubusercontent.com/afaq-ahmad/Hotel-booking-demand-Case-Study/master/H2.csv
-
-Raw quirks: categorical strings are space-padded (e.g. `"HB       "`), and `Agent`/`Company` use the literal text `NULL` for missing values.
 
 **Column names:** the code uses the original source labels (e.g. `LeadTime`, `ADR`). If any module renames them, document the mapping here.
 
