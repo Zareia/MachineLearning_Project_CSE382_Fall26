@@ -1,0 +1,2 @@
+model,configuration,eps,min_samples,rows,features,clusters,noise_points,noise_percentage,evaluation_excludes_noise,silhouette_sample,silhouette_sample_size,silhouette_clusters_represented,davies_bouldin,pca_2d_explained_variance
+DBSCAN,baseline,0.5,5,78936,"LeadTime, StaysInWeekendNights, StaysInWeekNights, Adults, Children, Babies",186,700,0.8867943650552346,True,0.18798150735368355,5000,132,1.1341280716671651,0.40011731107121074
