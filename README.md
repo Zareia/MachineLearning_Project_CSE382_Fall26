@@ -56,6 +56,33 @@ tests/
 
 ## Run commands
 
+XGBoost baselines (from the repository root, after activating the environment):
+
+```bash
+python main.py train --task regression --model xgboost
+python main.py train --task classification --model xgboost
+python -m pytest -q
+```
+
+These commands use the team's data/configuration helpers and the seed/split
+settings in `config.yaml`. The existing KNN feature settings are preserved.
+XGBoost preprocessing is adapted from the current teammate V2 notebook, with
+country grouping, imputation and encoding fitted on training data only.
+No hyperparameter search or final test evaluation is performed.
+
+Results are saved under `outputs/xgb_*`; fitted pipelines are generated under
+`artifacts/` and are excluded from Git and the submission ZIP. Use `--data`,
+`--outputs` and `--artifacts` to override paths.
+
+- [XGBoost contribution report](reports/xgboost_milestone1.md)
+- [Generated metrics summary](outputs/xgb_baseline_summary.md)
+- [Tonight's submission checklist](reports/submission_checklist.md)
+
+KNN and XGBoost currently have different feature sets, populations and split
+policies. Their preliminary scores must not be used as a controlled model ranking.
+Source attributes are generally pre-arrival snapshots rather than verified
+booking-creation histories; the report documents this timing limitation.
+
 KNN regression baseline (PowerShell, from the repository root):
 
 ```powershell
@@ -96,3 +123,15 @@ retrain the model or evaluate the reserved test set.
 | 1 | Thu 5 Nov 2026 | EDA, preprocessing pipelines, leakage analysis, one untuned model per task, progress report |
 | 2 | Fri 11 Dec 2026 | All models + tuning, PCA/LDA, final app, final report |
 | Discussion | 18–24 Dec 2026 | Live demo + individual discussion |
+
+## Submission version
+
+Before creating the final team submission ZIP, record its approved source commit:
+
+```bash
+git rev-parse HEAD
+```
+
+Include that exact SHA and this repository URL in the README inside the submission
+ZIP. The contribution branch is still under review; its current HEAD must not be
+presented as an already approved team submission. See the submission checklist.
