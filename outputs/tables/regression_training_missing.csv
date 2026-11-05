@@ -1,0 +1,14 @@
+feature,missing_training_rows
+LeadTime,0
+ArrivalDateYear,0
+ArrivalDateMonth,0
+ArrivalDateDayOfMonth,0
+StaysInWeekendNights,0
+StaysInWeekNights,0
+Adults,0
+Children,4
+Babies,0
+Meal,0
+MarketSegment,0
+DistributionChannel,0
+ReservedRoomType,0
