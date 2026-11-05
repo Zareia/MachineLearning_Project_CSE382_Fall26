@@ -1,0 +1,6 @@
+flag,training_rows,percent_training,ADR_min,ADR_median,ADR_max,decision
+zero_guests,117,0.20890245862124376,0.0,0.0,200.0,retain; no verified correction
+zero_nights,240,0.42851786383844875,0.0,0.0,0.0,retain; no verified correction
+zero_ADR,880,1.5712321674076455,0.0,0.0,0.0,retain; no verified correction
+ADR_over_500_review_only,1,0.0017854910993268698,5400.0,5400.0,5400.0,retain; no verified correction
+babies_over_3_review_only,1,0.0017854910993268698,95.0,95.0,95.0,retain; no verified correction
