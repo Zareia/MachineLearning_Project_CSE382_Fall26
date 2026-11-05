@@ -58,3 +58,21 @@ classification:
 
 clustering:
   features: []
+  agglomerative:
+    # Descriptive booking attributes; outcome columns are rejected. ADR is a descriptive input here,
+    # but it is computed from lodging transactions, so it is not a verified booking-time value.
+    features: [LeadTime, StaysInWeekendNights, StaysInWeekNights, Adults, ADR]
+    # Summarised per cluster for interpretation only (never used for fitting or selection).
+    profile_columns: [Children, MarketSegment, CustomerType, DepositType, Meal, IsRepeatedGuest,
+                      TotalOfSpecialRequests]
+    sample_size: 8000       # seeded random sample; full hierarchical clustering needs O(n^2) memory
+    dendrogram_leaves: 30
+    # Milestone 1 untuned baseline (the default command).
+    baseline: {n_clusters: 3, linkage: ward, metric: euclidean}
+    # Optional, not part of the Milestone 1 baseline: --search and --stability.
+    search:
+      n_clusters: [2, 3, 4, 5, 6, 7, 8, 9, 10]
+      linkage: [ward, complete, average, single]
+      metric: [euclidean, manhattan, cosine]   # Ward only supports Euclidean; other pairs are skipped
+      min_cluster_fraction: 0.02               # reject configurations with a cluster under 2% of the sample
+    stability_runs: 10
