@@ -47,6 +47,14 @@ classification:
   target: IsCanceled
   stratify: true
   features: []
+  # Inputs come from the shared src/preprocessing/booking.py classification policy.
+  decision_tree:
+    # Untuned Milestone 1 baseline: these are the scikit-learn defaults (seed: random_seed).
+    criterion: gini
+    max_depth: null
+    min_samples_split: 2
+    min_samples_leaf: 1
+    class_weight: null
 
 clustering:
   features: []

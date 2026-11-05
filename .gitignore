@@ -22,3 +22,6 @@ data/processed/*
 .vscode/
 .idea/
 .claude/settings.local.json
+
+# Byte-identical copy of the committed xgb_classification_splits.csv (same split policy and seed)
+outputs/decision_tree_classification_splits.csv
