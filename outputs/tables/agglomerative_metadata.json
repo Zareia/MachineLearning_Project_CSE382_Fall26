@@ -1,0 +1,42 @@
+{
+  "algorithm": "AgglomerativeClustering",
+  "features": [
+    "LeadTime",
+    "StaysInWeekendNights",
+    "StaysInWeekNights",
+    "Adults",
+    "ADR"
+  ],
+  "preprocessing": "median impute -> log1p(clip at 0) -> StandardScaler, fitted on the sample",
+  "population": {
+    "source": "src.preprocessing.booking.load_h2 (team eligibility; duplicates retained)",
+    "eligible_rows": 78936,
+    "data_audit": {
+      "source_rows": 79330,
+      "source_columns": 31,
+      "removed_undefined_MarketSegment": 2,
+      "removed_undefined_DistributionChannel": 2,
+      "removed_no_adult": 390,
+      "retained_rows": 78936,
+      "exact_duplicate_rows_retained": 25885
+    }
+  },
+  "sample": {
+    "size": 8000,
+    "seed": 42,
+    "method": "simple random, no replacement",
+    "fingerprint": "93aedda6576ba581"
+  },
+  "configurations": {
+    "baseline": {
+      "n_clusters": 3,
+      "linkage": "ward",
+      "metric": "euclidean"
+    }
+  },
+  "search_run": false,
+  "stability_run": false,
+  "predict_supported": false,
+  "predict_note": "AgglomerativeClustering cannot assign unseen bookings; use the saved sample labels.",
+  "test_split_used": false
+}
