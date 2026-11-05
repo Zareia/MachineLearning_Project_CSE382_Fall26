@@ -1,8 +1,14 @@
 # Decision Tree Classification and Agglomerative Clustering — Milestone 1
 
-**Course:** CSE382 — Introduction to Machine Learning
+**Student Name:** Seifallah Magdy
 
-**Contributor:** seifallahmagdy (GitHub). Full name and student ID to be confirmed in the team table.
+**Student ID:** 2301147
+
+**Contribution:** Decision Tree Classification and Agglomerative Clustering.
+
+**GitHub:** seifallahmagdy
+
+**Course:** CSE382 — Introduction to Machine Learning
 
 **Date:** 5 November 2026
 
