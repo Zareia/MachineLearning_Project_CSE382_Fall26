@@ -42,12 +42,12 @@ def evaluate(task, pipeline, X, y):
             "TN": int(tn), "FP": int(fp), "FN": int(fn), "TP": int(tp)}
 
 
-def save_confusion_matrices(validation, folds, output_dir):
+def save_confusion_matrices(validation, folds, output_dir, prefix="xgb"):
     names = ["TN", "FP", "FN", "TP"]
     pooled = folds[names].sum()
     rows = [{"evaluation": "validation", **{k: validation[k] for k in names}},
             {"evaluation": "cv_pooled", **pooled.to_dict()}]
-    pd.DataFrame(rows).to_csv(output_dir / "xgb_classification_confusion_matrices.csv", index=False)
+    pd.DataFrame(rows).to_csv(output_dir / f"{prefix}_classification_confusion_matrices.csv", index=False)
     fig, axes = plt.subplots(1, 2, figsize=(10, 4.5))
     for ax, scores, title in zip(axes, [validation, pooled], ["Validation", f"{len(folds)}-fold CV (pooled)"]):
         matrix = np.asarray([scores[k] for k in names], dtype=int).reshape(2, 2)
@@ -55,11 +55,12 @@ def save_confusion_matrices(validation, folds, output_dir):
             ax=ax, colorbar=False, cmap="Blues", values_format="d")
         ax.set_title(title)
     fig.tight_layout()
-    fig.savefig(output_dir / "xgb_classification_confusion_matrix.png", dpi=180)
+    fig.savefig(output_dir / f"{prefix}_classification_confusion_matrix.png", dpi=180)
     plt.close(fig)
 
 
-def train_baseline(task, pipeline, data_path, output_dir, artifact_dir):
+def train_baseline(task, pipeline, data_path, output_dir, artifact_dir, prefix="xgb"):
+    """Model-agnostic: any `preprocessing` + `model` pipeline. `prefix` names every output file."""
     output_dir, artifact_dir = Path(output_dir), Path(artifact_dir)
     output_dir.mkdir(parents=True, exist_ok=True)
     artifact_dir.mkdir(parents=True, exist_ok=True)
@@ -88,7 +89,7 @@ def train_baseline(task, pipeline, data_path, output_dir, artifact_dir):
     assignments.loc[validation, "split"] = "validation"
     for fold, (_, held_out) in enumerate(folds, 1):
         assignments.loc[train[held_out], "cv_fold"] = fold
-    assignments.to_csv(output_dir / f"xgb_{task}_splits.csv")
+    assignments.to_csv(output_dir / f"{prefix}_{task}_splits.csv")
 
     started = perf_counter()
     # Limit CPU resources without changing estimator hyperparameters.
@@ -107,14 +108,13 @@ def train_baseline(task, pipeline, data_path, output_dir, artifact_dir):
     cv_results = pd.DataFrame(fold_scores).set_index("fold")
     results = pd.DataFrame({"validation": validation_scores, "cv_mean": cv_results.mean(),
                             "cv_std": cv_results.std(ddof=1)}).rename_axis("metric")
-    results.to_csv(output_dir / f"xgb_{task}_metrics.csv")
-    cv_results.to_csv(output_dir / f"xgb_{task}_cv_folds.csv")
-    joblib.dump(pipeline, artifact_dir / f"xgb_{task}_pipeline.joblib")
+    results.to_csv(output_dir / f"{prefix}_{task}_metrics.csv")
+    cv_results.to_csv(output_dir / f"{prefix}_{task}_cv_folds.csv")
+    joblib.dump(pipeline, artifact_dir / f"{prefix}_{task}_pipeline.joblib")
     encoded = pipeline.named_steps["preprocessing"].get_feature_names_out().tolist()
-    pd.Series(encoded, name="encoded_feature").to_csv(output_dir / f"xgb_{task}_features.csv", index=False)
+    pd.Series(encoded, name="encoded_feature").to_csv(output_dir / f"{prefix}_{task}_features.csv", index=False)
     if task == "classification":
-        save_confusion_matrices(validation_scores, cv_results, output_dir)
-    import xgboost
+        save_confusion_matrices(validation_scores, cv_results, output_dir, prefix)
     metadata = {
         "task": task, "target": TARGETS[task], "seed": seed, "split_config": split,
         "split_sizes": {"train": len(train), "validation": len(validation), "test": len(test)},
@@ -131,9 +131,12 @@ def train_baseline(task, pipeline, data_path, output_dir, artifact_dir):
         "versions": {p: importlib.metadata.version(p) for p in
                      ["numpy", "pandas", "scikit-learn", "matplotlib", "joblib", "PyYAML", "threadpoolctl"]},
     }
-    metadata["versions"]["xgboost"] = xgboost.__version__
-    (output_dir / f"xgb_{task}_metadata.json").write_text(json.dumps(metadata, indent=2, allow_nan=False) + "\n")
-    write_summary(output_dir)
+    if type(pipeline.named_steps["model"]).__module__.startswith("xgboost"):
+        import xgboost
+        metadata["versions"]["xgboost"] = xgboost.__version__
+    (output_dir / f"{prefix}_{task}_metadata.json").write_text(json.dumps(metadata, indent=2, allow_nan=False) + "\n")
+    if prefix == "xgb":  # The summary file describes the XGBoost baselines only.
+        write_summary(output_dir)
     print(f"\n{task.upper()}\n{results.to_string(float_format=lambda v: f'{v:.6f}')}\n", flush=True)
     return results
 
