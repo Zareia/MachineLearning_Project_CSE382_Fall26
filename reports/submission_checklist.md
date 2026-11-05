@@ -34,6 +34,12 @@ The report is a progress report, not the complete Milestone 2 project report.
 - [ ] Explain the current feature-timing and split differences honestly. Do not
   declare a model winner or claim a globally common untouched final test set from
   these separate exploratory runs.
+- [ ] Review the newer team scripts `src/regression/10_linear_regression.py` and
+  `src/tuning/11_linear_regression_tuning.py` before running them for Milestone 1:
+  both currently predict and score their test partitions by default. Disable or
+  explicitly defer those test-evaluation blocks until final evaluation. The
+  XGBoost CLI does not invoke either script; they were merged without altering
+  the teammate's implementation or running their test evaluation.
 - [ ] Approve the contribution branch, then authorize push/PR separately.
 - [ ] Agree the exact team submission revision and put its actual SHA in the ZIP's README.
 - [ ] Inspect the ZIP contents and submit through the course's announced channel.
