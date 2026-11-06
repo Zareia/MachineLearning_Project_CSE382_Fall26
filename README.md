@@ -116,6 +116,42 @@ Writes `outputs/figures/knn_training_adr.png`,
 `outputs/tables/knn_error_summary.json`. Run the baseline first. Plotting does not
 retrain the model or evaluate the reserved test set.
 
+Decision Tree classification and Agglomerative clustering baselines:
+
+```bash
+python main.py train --task classification --model decision_tree
+python main.py cluster --algorithm agglomerative
+```
+
+The Decision Tree is an untuned `DecisionTreeClassifier` (scikit-learn defaults,
+`random_state` 42) behind the shared `build_preprocessor("classification")`, so it
+uses the same inputs, leakage exclusions, stratified 70/15/15 split and
+training-only five-fold CV as XGBoost. It runs through the same runner and saves
+`outputs/decision_tree_classification_*`. The reserved test rows are never
+predicted or scored. Its split file is regenerated locally and git-ignored,
+because it is byte-identical to `outputs/xgb_classification_splits.csv`.
+
+Agglomerative clustering uses the team's `load_h2()` eligible rows (duplicates
+retained) and clusters a seeded 8,000-booking sample on LeadTime,
+StaysInWeekendNights, StaysInWeekNights, Adults and ADR. The default command fits
+only the untuned baseline in `config.yaml` (Ward, Euclidean, k=3) and writes
+`outputs/tables/agglomerative_*` and `outputs/figures/agglomerative_*`.
+`--search` (parameter grid with unsupervised selection) and `--stability`
+(ARI across seeded resamples) are optional extensions, not the Milestone 1
+baseline. The command uses `--data`, `--outputs` and `--artifacts` like `train`.
+
+Limitations:
+
+- `AgglomerativeClustering` cannot assign unseen bookings. The fitted
+  preprocessor and the sample's labels are saved under `artifacts/`, and the
+  metadata records `predict_supported: false`.
+- ADR is a descriptive clustering input, but it is computed from lodging
+  transactions, so it is not a verified booking-time value.
+- DBSCAN uses a different feature set and population, so its metrics must not be
+  ranked against Agglomerative.
+
+Details and results: [Decision Tree and Agglomerative report](reports/decision_tree_agglomerative_milestone1.md).
+
 ## Milestones
 
 | Milestone | Deadline | Scope |

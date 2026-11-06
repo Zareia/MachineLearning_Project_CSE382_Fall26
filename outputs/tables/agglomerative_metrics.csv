@@ -1,0 +1,2 @@
+configuration,n_clusters,linkage,metric,silhouette_euclidean,silhouette_fit_metric,davies_bouldin,min_cluster_fraction,sizes,stability_ari_median
+baseline,3,ward,euclidean,0.28790488888190297,0.28790488888190297,1.1222790844909736,0.011375,"{""0"": 6481, ""1"": 1428, ""2"": 91}",

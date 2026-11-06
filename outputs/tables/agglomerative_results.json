@@ -1,0 +1,21 @@
+{
+  "baseline": {
+    "params": {
+      "n_clusters": 3,
+      "linkage": "ward",
+      "metric": "euclidean"
+    },
+    "n_clusters_found": 3,
+    "sizes": {
+      "0": 6481,
+      "1": 1428,
+      "2": 91
+    },
+    "min_cluster_fraction": 0.011375,
+    "silhouette": 0.28790488888190297,
+    "silhouette_euclidean": 0.28790488888190297,
+    "davies_bouldin": 1.1222790844909736,
+    "note": null,
+    "fit_seconds": 3.733449399995152
+  }
+}

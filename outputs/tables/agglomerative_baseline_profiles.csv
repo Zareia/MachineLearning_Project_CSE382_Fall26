@@ -1,0 +1,4 @@
+cluster,bookings,share,LeadTime_mean,LeadTime_median,StaysInWeekendNights_mean,StaysInWeekendNights_median,StaysInWeekNights_mean,StaysInWeekNights_median,Adults_mean,Adults_median,ADR_mean,ADR_median,Children_mean,MarketSegment_top,MarketSegment_top_share,CustomerType_top,CustomerType_top_share,DepositType_top,DepositType_top_share,Meal_top,Meal_top_share,IsRepeatedGuest_mean,TotalOfSpecialRequests_mean,IsCanceled_rate_posthoc
+0,6481,0.8101,116.6102,80.0,0.8423,1.0,2.2219,2.0,2.063,2.0,110.0936,103.5,0.1125,Online TA,0.5379,Transient,0.7726,No Deposit,0.8321,BB,0.7769,0.0103,0.5937,0.4328
+1,1428,0.1785,81.1772,43.5,0.5581,0.0,1.9678,2.0,1.0,1.0,98.4361,91.66,0.0378,Online TA,0.2892,Transient,0.6338,No Deposit,0.8102,BB,0.8578,0.0644,0.3172,0.3796
+2,91,0.0114,38.5385,3.0,0.2527,0.0,1.022,1.0,1.4945,1.0,0.0273,0.0,0.0769,Complementary,0.4176,Transient,0.7802,No Deposit,1.0,BB,0.7912,0.3846,0.7253,0.0879
